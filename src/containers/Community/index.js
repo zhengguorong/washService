@@ -10,7 +10,6 @@ class Community extends Component {
   render () {
     return (
       <View style={styles.container}>
-        <View style={styles.header}><Text style={styles.headerText}>月亮社区</Text></View>
       </View>
     )
   }

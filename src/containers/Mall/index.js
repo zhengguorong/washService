@@ -11,17 +11,16 @@ import {
   TouchableHighlight,
   TouchableOpacity
 } from 'react-native'
-import Swiper from 'react-native-swiper';
+import Swiper from 'react-native-swiper'
 
 class Mall extends Component {
   render() {
     const { banners, products } = this.props
-    console.log(this.props.test)
     const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
     const dataSource = ds.cloneWithRows(products)
     return (
       <View style={styles.container}>
-        <TouchableOpacity style={styles.cartBtn}><Image source={require('../../../assets/imgs/cart_total@2x.png')}/></TouchableOpacity>
+        <TouchableOpacity style={styles.cartBtn}><Image source={require('../../../assets/imgs/cart_total@2x.png')} /></TouchableOpacity>
         <ScrollView style={styles.scrollView}>
           <Swiper height={160}>
             {banners.map((item, index) => {
@@ -44,10 +43,10 @@ class Mall extends Component {
     )
   }
   componentDidMount() {
-    this.props.getAll()
+    this.props.getMallIndex()
   }
-  toProductDetail (itemId) {
-    this.props.navigation.navigate('ProductDetail',{ id: itemId})
+  toProductDetail(itemId) {
+    this.props.navigation.navigate('ProductDetail', { id: itemId })
   }
   _renderRow(rowData) {
     return (
@@ -60,13 +59,12 @@ class Mall extends Component {
 }
 
 export default connect(state => ({
-  banners: state.mall.index.banners,
-  categorys: state.mall.index.categorys,
-  products: state.mall.index.products,
-  test: state
+  banners: state.mall.banners,
+  categorys: state.mall.categorys,
+  products: state.mall.products
 }), dispatch => ({
-  getAll() {
-    return dispatch({ type: 'mall/index/getAll' })
+  getMallIndex() {
+    return dispatch({ type: 'mall/getMallIndex', id: '213' })
   }
 }))(Mall)
 
@@ -84,7 +82,7 @@ const styles = StyleSheet.create({
   },
   mark: {
     position: 'absolute',
-    zIndex:1,
+    zIndex: 1,
     width: 64,
     height: 20,
     borderBottomRightRadius: 10,
@@ -96,14 +94,14 @@ const styles = StyleSheet.create({
   },
   markText: {
     color: '#fff',
-    fontSize:12
+    fontSize: 12
   },
   cartBtn: {
     position: 'absolute',
     right: 12,
-    top:20,
+    top: 20,
     width: 24,
     height: 24,
-    zIndex:1
+    zIndex: 1
   }
 })

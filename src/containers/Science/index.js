@@ -11,7 +11,6 @@ class Science extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.header}><Text style={styles.headerText}>科学洗衣</Text></View>
         <View style={styles.container}>
           <WebView
             source={{ uri: 'http://mallapi.bluemoon.com.cn/App/h5/newproduct/index.html' }}

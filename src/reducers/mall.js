@@ -7,42 +7,51 @@
 import { handleActions, Action } from 'redux-actions'
 
 export const initialState = {
-  index: {
-    banners: [],
-    categorys: [],
-    products: [],
-    isLoadingBanners: false,
-    isLoadingCategorys: false,
-    isLoadingProducts: false
-  }
+  banners: [],
+  categorys: [],
+  products: [],
+  productDetail: {},
+  isLoadingBanners: false,
+  isLoadingCategorys: false,
+  isLoadingProducts: false,
+  isLoadingProductDetail:false
 }
 
 export default handleActions({
-  'mall/index/banners/start'(state) {
+  'mall/banners/start'(state) {
     return { ...state, isLoadingBanners: true }
   },
-  'mall/index/banners/save'(state, { payload }) {
-    return { ...state, index: { ...state.index, banners: payload } }
+  'mall/banners/save'(state, { payload }) {
+    return { ...state, banners: payload }
   },
-  'mall/index/banners/end'(state) {
+  'mall/banners/end'(state) {
     return { ...state, isLoadingBanners: false }
   },
-  'mall/index/categorys/start'(state) {
+  'mall/categorys/start'(state) {
     return { ...state, isLoadingCategorys: true }
   },
-  'mall/index/categorys/save'(state, { payload }) {
-    return { ...state, index: { ...state.index, categorys: payload } }
+  'mall/categorys/save'(state, { payload }) {
+    return { ...state, categorys: payload }
   },
-  'mall/index/categorys/end'(state) {
+  'mall/categorys/end'(state) {
     return { ...state, isLoadingCategorys: false }
   },
-  'mall/index/products/start'(state) {
+  'mall/products/start'(state) {
     return { ...state, isLoadingProducts: true }
   },
-  'mall/index/products/save'(state, { payload }) {
-    return { ...state, index: { ...state.index, products: payload } }
+  'mall/products/save'(state, { payload }) {
+    return { ...state, products: payload }
   },
-  'mall/index/products/end'(state) {
+  'mall/products/end'(state) {
     return { ...state, isLoadingProducts: false }
-  }
+  },
+  'mall/productDetail/start'(state) {
+    return { ...state, isLoadingProductDetail: true }
+  },
+  'mall/productDetail/save'(state, { payload }) {
+    return { ...state, productDetail: payload}
+  },
+  'mall/productDetail/end'(state) {
+    return { ...state, isLoadingProductDetail: false }
+  },
 }, initialState)

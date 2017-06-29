@@ -11,3 +11,8 @@ export const getCategoryList = () => {
 export const getRecommendItem = () => {
   return request.post('/washMall/item/getRecommendItem')
 }
+
+export const getItemDetail =  (itemId) => {
+  console.log(itemId)
+  return request.post('/washMall/item/getItemDetail', {itemId: itemId})
+}

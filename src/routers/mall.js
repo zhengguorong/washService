@@ -1,18 +1,14 @@
-import { StackNavigator } from 'react-navigation'
-import Index from '../containers/Mall'
+import Mall from '../containers/Mall'
 import ProductDetail from '../containers/Mall/productDetail'
 
-const MallStack = StackNavigator({
-  Index: {
-    screen: Index,
-    navigationOptions: {
-      header: null
-    }
+const mallRouter = {
+  Mall: {
+    screen: Mall
   },
   ProductDetail: {
     path: 'prductDetail/:id',
     screen: ProductDetail,
   },
-});
+}
 
-export default MallStack
+export default mallRouter

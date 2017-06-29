@@ -7,10 +7,13 @@ import {
 } from 'react-native'
 
 class Booking extends Component {
+  static navigationOptions = {
+    title: '至尊洗衣',
+    headerStyle: { backgroundColor: '#fff' }
+  }
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.header}><Text style={styles.headerText}>至尊洗衣</Text></View>
       </View>
     )
   }
