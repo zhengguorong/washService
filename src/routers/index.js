@@ -1,53 +1,87 @@
 import { TabNavigator } from 'react-navigation'
-import React from 'react';
-import { Button, Text, Platform, ScrollView, StyleSheet } from 'react-native';
+import {Image, Platform} from 'react-native';
+import React from 'react'
+import Science from '../containers/Science'
+import Community from '../containers/Community'
+import Booking from '../containers/Booking'
+import Mall from './mall'
+import UserCenter from '../containers/UserCenter'
 
-const MyNavScreen = ({ navigation, banner }) => (
-  <ScrollView style={styles.container}>
-    <Text>{banner}</Text>
-    <Button
-      onPress={() => navigation.navigate('Home')}
-      title="Go to home tab"
-    />
-    <Button
-      onPress={() => navigation.navigate('Settings')}
-      title="Go to settings tab"
-    />
-    <Button onPress={() => navigation.goBack(null)} title="Go back" />
-  </ScrollView>
-);
+// 设置tab icon
+Science.navigationOptions =  {
+  tabBarIcon: ({ tintColor }) => (
+      <Image
+        source={require('../../assets/imgs/science-blue@2x.png')}
+        style={{tintColor: tintColor}}
+      />
+    )
+}
+Community.navigationOptions = {
+  tabBarIcon: ({ tintColor }) => (
+      <Image
+        source={require('../../assets/imgs/community-blue@2x.png')}
+        style={{tintColor: tintColor}}
+      />
+    )
+}
+Booking.navigationOptions = {
+  tabBarIcon: ({ tintColor }) => (
+      <Image
+        source={require('../../assets/imgs/wash-blue@2x.png')}
+        style={{tintColor: tintColor}}
+      />
+    )
+}
+Mall.navigationOptions = {
+  tabBarIcon: ({ tintColor }) => (
+      <Image
+        source={require('../../assets/imgs/shop-blue@2x.png')}
+        style={{tintColor: tintColor}}
+      />
+    )
+}
+UserCenter.navigationOptions = {
+  tabBarIcon: ({ tintColor }) => (
+      <Image
+        source={require('../../assets/imgs/mine-blue@2x.png')}
+        style={{tintColor: tintColor}}
+      />
+    )
+}
 
-const MyHomeScreen = ({ navigation }) => (
-  <MyNavScreen banner="Home Tab" navigation={navigation} />
-);
-
-const MyPeopleScreen = ({ navigation }) => (
-  <MyNavScreen banner="People Tab" navigation={navigation} />
-);
-
-
-const SimpleTabs = TabNavigator(
+// 初始化tab路由
+const HomeTabs = TabNavigator(
   {
-    Home: {
-      screen: MyHomeScreen,
-      path: '',
+    '科学洗衣': {
+      screen: Science,
+      path: 'science',
     },
-    People: {
-      screen: MyPeopleScreen,
-      path: 'cart',
+    '月亮社区': {
+      screen: Community,
+      path: 'community',
+    },
+    '至尊洗衣': {
+      screen: Booking,
+      path: 'booking',
+    },
+    '月亮商城': {
+      screen: Mall,
+      path: 'mall',
+    },
+    '我的': {
+      screen: UserCenter,
+      path: 'userCenter',
     }
   },
-  {
+  { 
+    initialRouteName: '月亮商城',
     tabBarOptions: {
-      activeTintColor: Platform.OS === 'ios' ? '#e91e63' : '#fff',
+      activeTintColor: '#0059f1',
+      style: {
+        backgroundColor: '#fff'
+      }
     },
   }
 );
 
-const styles = StyleSheet.create({
-  container: {
-    marginTop: Platform.OS === 'ios' ? 20 : 0,
-  },
-});
-
-export default SimpleTabs
+export default HomeTabs

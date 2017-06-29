@@ -1,13 +1,13 @@
 import { Provider } from 'react-redux'
 import * as React from 'react'
 import configureStore from './store'
-import Routers from './routers/routers'
+import Routers from './routers'
 
-const store = configureStore({})
+const store = configureStore({});
 
 const App = () => (
   <Provider store={store}>
-    <Routers/>
+    <Routers />
   </Provider>
-)
-export default App
+);
+export default App;

@@ -7,7 +7,7 @@ import {
 } from 'react-native'
 
 class Booking extends Component {
-  render () {
+  render() {
     return (
       <View style={styles.container}>
         <View style={styles.header}><Text style={styles.headerText}>至尊洗衣</Text></View>

@@ -7,14 +7,16 @@ const get = (uri) => {
 }
 
 const post = (uri, body = {}) => {
-  return fetch(API_BASE_URL + uri + getBaseParam(), {
-    body: JSON.stringify(body),
-    method: 'POST'
-  }).then(res => {
-    console.log(res)
-  }).catch (res => {
-    console.log(res)
-  })
+  let params = JSON.stringify(body)
+  return fetch(API_BASE_URL + uri + getBaseParam(params), {
+    body: params,
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'}
+  }).then(parseJSONFilter)
+}
+
+const parseJSONFilter = (response) => {
+  return response.json()
 }
 
 const getBaseParam = (rowStr = '') => {

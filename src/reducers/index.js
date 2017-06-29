@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
-import home from './home'
+import mall from './mall'
 
 export default combineReducers({
-  home
+  mall
 })
