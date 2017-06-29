@@ -16,6 +16,7 @@ import Swiper from 'react-native-swiper';
 class Mall extends Component {
   render() {
     const { banners, products } = this.props
+    console.log(this.props.test)
     const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
     const dataSource = ds.cloneWithRows(products)
     return (
@@ -43,7 +44,7 @@ class Mall extends Component {
     )
   }
   componentDidMount() {
-    this.props.getMallIndex()
+    this.props.getAll()
   }
   toProductDetail (itemId) {
     this.props.navigation.navigate('ProductDetail',{ id: itemId})
@@ -59,12 +60,13 @@ class Mall extends Component {
 }
 
 export default connect(state => ({
-  banners: state.mall.banners,
-  categorys: state.mall.categorys,
-  products: state.mall.products,
+  banners: state.mall.index.banners,
+  categorys: state.mall.index.categorys,
+  products: state.mall.index.products,
+  test: state
 }), dispatch => ({
-  getMallIndex() {
-    return dispatch({ type: 'mall/getMallIndex' })
+  getAll() {
+    return dispatch({ type: 'mall/index/getAll' })
   }
 }))(Mall)
 

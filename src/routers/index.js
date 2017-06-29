@@ -7,6 +7,42 @@ import Booking from '../containers/Booking'
 import Mall from './mall'
 import UserCenter from '../containers/UserCenter'
 
+
+// 初始化tab路由
+const HomeTabs = TabNavigator(
+  {
+    '科学洗衣': {
+      screen: Science,
+      path: 'science',
+    },
+    '月亮社区': {
+      screen: Community,
+      path: 'community',
+    },
+    '至尊洗衣': {
+      screen: Booking,
+      path: 'booking',
+    },
+    '月亮商城': {
+      screen: Mall,
+      path: 'mall',
+    },
+    '我的': {
+      screen: UserCenter,
+      path: 'userCenter',
+    }
+  },
+  { 
+    initialRouteName: '月亮商城',
+    tabBarOptions: {
+      activeTintColor: '#0059f1',
+      style: {
+        backgroundColor: '#fff'
+      }
+    },
+  }
+)
+
 // 设置tab icon
 Science.navigationOptions =  {
   tabBarIcon: ({ tintColor }) => (
@@ -49,39 +85,5 @@ UserCenter.navigationOptions = {
     )
 }
 
-// 初始化tab路由
-const HomeTabs = TabNavigator(
-  {
-    '科学洗衣': {
-      screen: Science,
-      path: 'science',
-    },
-    '月亮社区': {
-      screen: Community,
-      path: 'community',
-    },
-    '至尊洗衣': {
-      screen: Booking,
-      path: 'booking',
-    },
-    '月亮商城': {
-      screen: Mall,
-      path: 'mall',
-    },
-    '我的': {
-      screen: UserCenter,
-      path: 'userCenter',
-    }
-  },
-  { 
-    initialRouteName: '月亮商城',
-    tabBarOptions: {
-      activeTintColor: '#0059f1',
-      style: {
-        backgroundColor: '#fff'
-      }
-    },
-  }
-);
 
 export default HomeTabs
