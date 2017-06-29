@@ -13,23 +13,18 @@ const homeTabs = TabNavigator(
   {
     '科学洗衣': {
       screen: Science,
-      path: 'science',
     },
     '月亮社区': {
       screen: Community,
-      path: 'community',
     },
     '至尊洗衣': {
       screen: Booking,
-      path: 'booking',
     },
     '月亮商城': {
       screen: Mall,
-      path: 'mall',
     },
     '我的': {
       screen: UserCenter,
-      path: 'userCenter',
     }
   },
   {

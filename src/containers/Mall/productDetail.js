@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import util from '../../utils'
 import {
   Text,
   View,
   Image,
   TouchableOpacity,
   ScrollView,
-  StyleSheet
+  StyleSheet,
 } from 'react-native'
 import Swiper from 'react-native-swiper'
 
@@ -32,11 +33,20 @@ class Community extends Component {
             </View>
           </View>
           <View style={styles.detail}>
-
+            <View style={styles.detailHeader}>
+              <TouchableOpacity style={styles.detailHeaderItem}><Text style={styles.headerItemText}>商品详情</Text></TouchableOpacity>
+              <TouchableOpacity style={styles.detailHeaderItem}><Text style={styles.headerItemText}>评价</Text></TouchableOpacity>
+              <View style={styles.underLine}></View>
+            </View>
+            <View style={styles.detailContext}>
+              {productDetail.artImgUrls&&productDetail.artImgUrls.map((item, index) => {
+                return <Image key={index} style={{ width: util.size.width, height: util.size.width * item.height / item.width }} source={{uri: item.picUrl}}/>
+              })}
+            </View>
           </View>
         </ScrollView>
         <View style={styles.buyBar}>
-          <View style={styles.cartIcon}><Image source={require('../../../assets/imgs/cart_total@2x.png')}/></View>
+          <View style={styles.cartIcon}><Image source={require('../../../assets/imgs/cart_total@2x.png')} /></View>
           <View style={styles.addToCart}><Text style={styles.cartText}>加入购物车</Text></View>
           <View style={styles.buyNow}><Text style={styles.cartText}>立即购买</Text></View>
         </View>
@@ -115,18 +125,42 @@ const styles = StyleSheet.create({
   },
   addToCart: {
     backgroundColor: '#ff9800',
-    flex:3,
+    flex: 3,
     justifyContent: 'center',
     alignItems: 'center'
   },
   buyNow: {
     backgroundColor: '#e0483e',
-    flex:3,
+    flex: 3,
     justifyContent: 'center',
     alignItems: 'center'
   },
   cartText: {
     fontSize: 17,
     color: '#fff'
+  },
+  detailHeader: {
+    flexDirection: 'row',
+    height: 44,
+    borderBottomWidth:1,
+    borderBottomColor:'#ccc',
+    marginBottom: 10
+  },
+  detailHeaderItem: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  headerItemText: {
+    fontSize: 15,
+    color: '#333'
+  },
+  underLine: {
+    backgroundColor: '#0058f1',
+    height: 2,
+    width: 70,
+    position: 'absolute',
+    bottom: 0,
+    left: 58
   }
 })

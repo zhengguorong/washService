@@ -6,7 +6,6 @@ const mallRouter = {
     screen: Mall
   },
   ProductDetail: {
-    path: 'prductDetail/:id',
     screen: ProductDetail,
   },
 }

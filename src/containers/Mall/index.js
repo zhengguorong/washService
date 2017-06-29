@@ -20,7 +20,7 @@ class Mall extends Component {
     const dataSource = ds.cloneWithRows(products)
     return (
       <View style={styles.container}>
-        <TouchableOpacity style={styles.cartBtn}><Image source={require('../../../assets/imgs/cart_total@2x.png')} /></TouchableOpacity>
+        <TouchableOpacity style={styles.cartBtn}><Image style={styles.cartImage} source={require('../../../assets/imgs/cart_large@3x.png')} /></TouchableOpacity>
         <ScrollView style={styles.scrollView}>
           <Swiper height={160}>
             {banners.map((item, index) => {
@@ -98,10 +98,12 @@ const styles = StyleSheet.create({
   },
   cartBtn: {
     position: 'absolute',
-    right: 12,
-    top: 20,
-    width: 24,
-    height: 24,
+    right: 15,
+    top: 30,
     zIndex: 1
+  },
+  cartImage: {
+    width: 24,
+    height: 24
   }
 })
