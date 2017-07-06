@@ -13,6 +13,13 @@ export const getRecommendItem = () => {
 }
 
 export const getItemDetail =  (itemId) => {
-  console.log(itemId)
   return request.post('/washMall/item/getItemDetail', {itemId: itemId})
+}
+
+export const addCartProduct = (itemId, num, productType = 'ITEM') => {
+  return request.post('/washMall/cart/addCartProduct', {productId: itemId, num: num, productType: productType})
+}
+
+export const login = (mobile, password) => {
+  return request.post('/washMall/account/login', {mobile: mobile, password: password})
 }

@@ -7,7 +7,6 @@ import Booking from '../containers/Booking'
 import Mall from '../containers/Mall'
 import UserCenter from '../containers/UserCenter'
 
-
 // 初始化tab路由
 const homeTabs = TabNavigator(
   {

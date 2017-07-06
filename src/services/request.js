@@ -1,22 +1,23 @@
 import * as config from '../config'
 import md5 from 'md5'
+import { AsyncStorage } from 'react-native'
 
 const API_BASE_URL = 'http://mallapi.bluemoon.com.cn'
-const get = (uri) => {
-  return fetch(API_BASE_URL + uri + getBaseParam())
-}
 
-const post = (uri, body = {}) => {
+const post = async (uri, body = {}) => {
+  const token = await AsyncStorage.getItem('token');
+  body['token'] = token
   let params = JSON.stringify(body)
   return fetch(API_BASE_URL + uri + getBaseParam(params), {
     body: params,
     method: 'POST',
-    headers: {'Content-Type': 'application/json'}
-  }).then(parseJSONFilter)
-}
-
-const parseJSONFilter = (response) => {
-  return response.json()
+    headers: { 'Content-Type': 'application/json' }
+  }).then((response => {
+    return response.json()
+  })).then(res => {
+    console.log({request: {url: API_BASE_URL + uri, params: body}, response: res}, 'network')
+    return res
+  })
 }
 
 const getBaseParam = (rowStr = '') => {
@@ -31,6 +32,5 @@ const getBaseParam = (rowStr = '') => {
 }
 
 export default request = {
-  get,
   post
 }

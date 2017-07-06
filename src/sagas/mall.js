@@ -24,9 +24,9 @@ export function* getCategorys () {
 
 export function* getProducts () {
   yield put({type: 'mall/products/start'})
-  const recommond = yield call(api.getRecommendItem) 
+  const recommond = yield call(api.getRecommendItem)
   yield put({type: 'mall/products/save', payload: recommond.recommendManage})
-  yield put({type: 'mall/products/start'})
+  yield put({type: 'mall/products/end'})
 }
 
 export function* getProductDetail ({id}) {

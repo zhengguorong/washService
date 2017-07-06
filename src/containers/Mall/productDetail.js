@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import util from '../../utils'
+import { NavigationActions } from 'react-navigation'
 import {
   Text,
   View,
@@ -14,11 +15,12 @@ import Swiper from 'react-native-swiper'
 class Community extends Component {
   static navigationOptions = {
     title: '商品详情',
+    headerBackTitle: null,
     headerStyle: { backgroundColor: '#fff' },
     headerRight: <TouchableOpacity onPress={() => { console.log('share') }} style={{ marginRight: 14 }}><Image source={require('../../../assets/imgs/share@2x.png')} /></TouchableOpacity>
   }
   render() {
-    const { productDetail } = this.props
+    const { productDetail, addToCart } = this.props
     return (
       <View style={styles.container}>
         <ScrollView style={styles.container}>
@@ -47,7 +49,7 @@ class Community extends Component {
         </ScrollView>
         <View style={styles.buyBar}>
           <View style={styles.cartIcon}><Image source={require('../../../assets/imgs/cart_total@2x.png')} /></View>
-          <View style={styles.addToCart}><Text style={styles.cartText}>加入购物车</Text></View>
+          <TouchableOpacity onPress={addToCart.bind(this,productDetail)} style={styles.addToCart}><Text style={styles.cartText}>加入购物车</Text></TouchableOpacity>
           <View style={styles.buyNow}><Text style={styles.cartText}>立即购买</Text></View>
         </View>
       </View>
@@ -60,10 +62,14 @@ class Community extends Component {
 }
 
 export default connect(state => ({
-  productDetail: state.mall.productDetail
+  productDetail: state.mall.productDetail,
+  loginSuccess: state.mall.loginSuccess
 }), dispatch => ({
   getProductDetail(id) {
     return dispatch({ type: 'mall/getProductDetail', id: id })
+  },
+  addToCart (product) {
+    return dispatch({ type: 'cart/addToCart', product: product })
   }
 }))(Community)
 

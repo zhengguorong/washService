@@ -6,7 +6,13 @@
 
 import { combineReducers } from 'redux'
 import mall from './mall'
+import cart from './cart'
+import user from './user'
+import ui from './ui'
 
 export default combineReducers({
-  mall
+  mall,
+  cart,
+  user,
+  ui
 })

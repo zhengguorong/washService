@@ -1,6 +1,6 @@
 /**
  * reduce命名规则
- * 例如 'mall/index/banners/start'
+ * 例如 'mall/banners/start'
  * mall表示模块，index表示页面，banners表示资源，start表示动作,这里的start表示开始进行网络请求
  */
 
