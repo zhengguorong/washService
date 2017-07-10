@@ -1,9 +1,10 @@
-import { handleActions, Action } from 'redux-actions'
+import { handleActions } from 'redux-actions'
 
 export const initialState = {
   showNoLogin: false,
   errorMessage: '',
-  loginSuccess: false
+  loginSuccess: false,
+  userInfo: {}
 }
 
 export default handleActions({
@@ -18,5 +19,8 @@ export default handleActions({
   },
   'user/login/fail' (state, {payload}) {
     return {...state, errorMessage: payload}
+  },
+  'user/userInfo/save' (state, {payload}) {
+    return {...state, userInfo: payload}
   }
 }, initialState)

@@ -1,4 +1,4 @@
-import { take, put, fork, select, call, takeLatest, all} from 'redux-saga/effects'
+import { put, call, takeLatest, all} from 'redux-saga/effects'
 import { AsyncStorage } from 'react-native'
 import * as api from '../services/api'
 import md5 from 'md5'
@@ -14,8 +14,14 @@ export function* login ({mobile, password}) {
   }
 }
 
+export function* getUserInfo () {
+  const response = yield call(api.getUserInfo)
+  yield put({type: 'user/userInfo/save', payload: response})
+}
+
 export default function* user() {
   yield all([
-    takeLatest('user/login', login)
+    takeLatest('user/login', login),
+    takeLatest('user/userInfo', getUserInfo)
   ])
 }

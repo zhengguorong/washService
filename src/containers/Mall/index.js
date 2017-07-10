@@ -16,7 +16,7 @@ import Swiper from 'react-native-swiper'
 class Mall extends Component {
   render() {
     const { banners, products } = this.props
-    const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
+    const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
     const dataSource = ds.cloneWithRows(products)
     return (
       <View style={styles.container}>
@@ -64,7 +64,7 @@ export default connect(state => ({
   products: state.mall.products
 }), dispatch => ({
   getMallIndex() {
-    return dispatch({ type: 'mall/getMallIndex', id: '213' })
+    return dispatch({ type: 'mall/getMallIndex'})
   }
 }))(Mall)
 

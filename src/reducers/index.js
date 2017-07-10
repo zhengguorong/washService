@@ -9,10 +9,12 @@ import mall from './mall'
 import cart from './cart'
 import user from './user'
 import ui from './ui'
+import community from './community'
 
 export default combineReducers({
   mall,
   cart,
   user,
-  ui
+  ui,
+  community
 })

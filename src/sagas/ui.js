@@ -1,4 +1,4 @@
-import { take, put, fork, select, call, takeLatest, all} from 'redux-saga/effects'
+import {  put,all, takeEvery} from 'redux-saga/effects'
 
 export function* toast({payload}) {
   yield put({ type: 'ui/toast/show', payload: {text: payload.text, visible: true, kind: payload.kind}})
@@ -10,6 +10,6 @@ export const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
 
 export default function* ui() {
   yield all([
-    takeLatest('ui/toast', toast)
+    takeEvery('ui/toast', toast)
   ])
 }

@@ -23,3 +23,11 @@ export const addCartProduct = (itemId, num, productType = 'ITEM') => {
 export const login = (mobile, password) => {
   return request.post('/washMall/account/login', {mobile: mobile, password: password})
 }
+
+export const getUserInfo = () => {
+  return request.post('/washMall/user/getUserInfo')
+}
+
+export const getPostList = (pageSize, queryType = 'All') => {
+  return request.post('/washMall/bbs/getPostList', {pageSize, queryType})
+}

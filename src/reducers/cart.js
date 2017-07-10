@@ -1,4 +1,4 @@
-import { handleActions, Action } from 'redux-actions'
+import { handleActions } from 'redux-actions'
 
 export const initialState = {
   products: [],

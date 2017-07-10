@@ -1,5 +1,5 @@
 import { TabNavigator } from 'react-navigation'
-import { Image, Platform } from 'react-native';
+import { Image, Platform } from 'react-native'
 import React from 'react'
 import Science from '../containers/Science'
 import Community from '../containers/Community'
@@ -27,7 +27,7 @@ const homeTabs = TabNavigator(
     }
   },
   {
-    initialRouteName: '月亮商城',
+    initialRouteName: '月亮社区',
     tabBarOptions: {
       activeTintColor: '#0059f1',
       style: {
