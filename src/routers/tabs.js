@@ -28,18 +28,30 @@ const homeTabs = TabNavigator(
   },
   {
     initialRouteName: '月亮社区',
+    tabBarPosition: 'bottom',
     tabBarOptions: {
+      inactiveTintColor: '#999',
       activeTintColor: '#0059f1',
       style: {
+        backgroundColor: '#fff',
+        height: Platform.OS === 'android' ? 55: 50,
+        borderTopColor: '#ccc',
+        borderTopWidth: 1
+      },
+      labelStyle: {
+        fontSize: 10
+      },
+      indicatorStyle: {
         backgroundColor: '#fff'
-      }
+      },
+      showIcon: true,
     },
   }
 )
 
 // 设置tab icon
 Science.navigationOptions = {
-  title: '科学洗衣',
+  tabBarLabel: '科学洗衣',
   headerStyle: { backgroundColor: '#fff' },
   tabBarIcon: ({ tintColor }) => (
     <Image
@@ -49,7 +61,7 @@ Science.navigationOptions = {
   )
 }
 Community.navigationOptions = {
-  title: '至尊社区',
+  tabBarLabel: '至尊社区',
   headerStyle: { backgroundColor: '#fff' },
   tabBarIcon: ({ tintColor }) => (
     <Image
@@ -59,7 +71,7 @@ Community.navigationOptions = {
   )
 }
 Booking.navigationOptions = {
-  title: '至尊洗衣',
+  tabBarLabel: '至尊洗衣',
   headerStyle: { backgroundColor: '#fff' },
   tabBarIcon: ({ tintColor }) => (
     <Image
@@ -78,7 +90,7 @@ Mall.navigationOptions = {
   )
 }
 UserCenter.navigationOptions = {
-  title: '我的',
+  tabBarLabel: '我的',
   headerStyle: { backgroundColor: '#fff' },
   tabBarIcon: ({ tintColor }) => (
     <Image

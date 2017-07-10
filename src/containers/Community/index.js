@@ -1,87 +1,104 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 import {
-  Text,
   View,
+  Text,
+  TextInput,
+  Button,
+  ListView,
   TouchableOpacity,
   StyleSheet
 } from 'react-native'
 
-class Community extends Component {
+export default class Community extends Component {
+  constructor() {
+    super()
+    // ds和todoList两变量没必要放到state,因为这两个变量不会用于渲染页面，因此没必要放进去
+    this.ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
+    this.todoList = []
+    this.state = {
+      dataSource: this.ds.cloneWithRows([]),
+      inputText: ''
+    }
+  }
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.headerContainer}>
-          <View style={styles.leftBtn}></View>
-          <View>
-            <Text style={[styles.headerTextColor, styles.headerTitle]}>这是标题很长的标题</Text>
-          </View>
-          <View>
-            <Text style={[styles.headerTextColor, styles.rightBtn]}>+</Text>
-          </View>
+        <View style={styles.inputContainer}>
+          <TextInput onChangeText={(text) => { this.setState({ inputText: text }) }} multiline={true} placeholder='请输入事项' style={styles.input} />
+          <Button title='添加' onPress={this.addRow.bind(this)}></Button>
         </View>
-        <TouchableOpacity style={styles.btn}>
-          <Text style={{ color: '#fff' }}>button</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={this.changeColor} style={styles.btn}>
-          <Text style={{ color: '#fff' }}>button</Text>
-        </TouchableOpacity>
+        <ListView
+          dataSource={this.state.dataSource}
+          renderRow={this._renderRow.bind(this)}
+          enableEmptySections={true}
+        />
       </View>
     )
   }
+  // 单条数据视图
+  _renderRow(rowData, sectionId, index) {
+    return (
+      <TouchableOpacity style={styles.row} onPress={this.finishRow.bind(this, index)}>
+        <Text style={[styles.rowText, { textDecorationLine: rowData.isFinish ? 'line-through' : 'none' }]}>{rowData.text}</Text>
+        <Button onPress={this.deleteRow.bind(this,index)} title='删除'></Button>
+      </TouchableOpacity>
+    )
+  }
+  // 重新渲染列表
+  _renderList() {
+    this.setState({
+      dataSource: this.ds.cloneWithRows(this.todoList)
+    })
+  }
+  // 添加当条数据
+  addRow() {
+    this.todoList.push({ text: this.state.inputText, isFinish: false })
+    this._renderList()
+  }
+  deleteRow(index) {
+    // 删除数组内元素
+    this.todoList.splice(index, 1)
+    this._renderList()
+  }
+  finishRow(index) {
+    this.todoList[index].isFinish = true
+    this._renderList()
+  }
 }
-
-export default connect(state => ({
-
-}), dispatch => ({
-
-}))(Community)
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    paddingTop: 10,
+    paddingLeft: 10,
+    paddingRight: 10,
+    backgroundColor: '#fff'
   },
-  header: {
-    height: 55,
-    marginTop: 15,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderBottomWidth: 1,
-    borderBottomColor: '#ccc'
-  },
-  headerText: {
-    fontSize: 16
-  },
-  headerContainer: {
-    height: 64,
-    backgroundColor: '#1fb8ff',
+  inputContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between'
+    marginBottom: 10
   },
-  headerTextColor: {
-    color: '#fff',
-    fontSize: 16
-  },
-  leftBtn: {
-    backgroundColor: '#000',
-    width: 60
-  },
-  headerTitle: {
-    backgroundColor: 'blue',
-    marginLeft: 10
-  },
-  rightBtn: {
-    paddingRight: 30,
-    width: 60,
-    backgroundColor: 'red',
-    alignItems: 'flex-end'
-  },
-  btn: {
-    width: 100,
-    height: 50,
-    backgroundColor: 'blue',
+  input: {
+    flex: 1,
+    borderBottomWidth: 1,
+    borderBottomColor: '#999',
     justifyContent: 'center',
-    alignItems: 'center'
+    paddingLeft: 10,
+    fontSize: 14
+  },
+  row: {
+    height: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#ccc',
+    borderBottomColor: '#fff',
+    borderBottomWidth: 1,
+    paddingLeft: 10,
+    flexDirection: 'row'
+  },
+  rowText: {
+    fontSize: 15,
+    flex: 1
   }
 })

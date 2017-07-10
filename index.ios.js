@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import {
   AppRegistry
-} from 'react-native';
-import Main from './src/app.js';
+} from 'react-native'
+import Main from './src/app.js'
 
-AppRegistry.registerComponent('washService', () => Main);
+AppRegistry.registerComponent('washService', () => Main)
