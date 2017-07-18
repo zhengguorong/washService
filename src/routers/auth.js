@@ -10,9 +10,9 @@ const AuthRouter = StackNavigator({
     screen: Login
   }
 }, {
-    initialRouteName: 'LoginTips',
-    headerMode: 'none',
-    mode: 'modal'
-  })
+  initialRouteName: 'LoginTips',
+  headerMode: 'none',
+  mode: 'modal'
+})
 
 export default AuthRouter

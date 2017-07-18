@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import util from '../../utils'
+import CartBadge from '../../components/CartBadge'
 import {
   Text,
   View,
@@ -8,19 +9,21 @@ import {
   StyleSheet,
   ScrollView,
   ListView,
-  TouchableHighlight,
   TouchableOpacity
 } from 'react-native'
 import Swiper from 'react-native-swiper'
 
 class Mall extends Component {
   render() {
-    const { banners, products } = this.props
+    const { banners, products, total, navigation } = this.props
     const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 })
     const dataSource = ds.cloneWithRows(products)
     return (
       <View style={styles.container}>
-        <TouchableOpacity style={styles.cartBtn}><Image style={styles.cartImage} source={require('../../../assets/imgs/cart_large@3x.png')} /></TouchableOpacity>
+        <TouchableOpacity style={styles.cartBtn} onPress={()=> {navigation.navigate('Cart')}}>
+          <CartBadge num={total} />
+          <Image style={styles.cartImage} source={require('../../../assets/imgs/cart_large@3x.png')} />
+        </TouchableOpacity>
         <ScrollView style={styles.scrollView}>
           <Swiper height={160}>
             {banners.map((item, index) => {
@@ -44,6 +47,7 @@ class Mall extends Component {
   }
   componentDidMount() {
     this.props.getMallIndex()
+    this.props.getTotal()
   }
   toProductDetail(itemId) {
     this.props.navigation.navigate('ProductDetail', { id: itemId })
@@ -51,7 +55,7 @@ class Mall extends Component {
   _renderRow(rowData) {
     return (
       <TouchableOpacity onPress={this.toProductDetail.bind(this, rowData.itemId)}>
-        <View style={styles.mark}><Text style={styles.markText}>{rowData.mark}</Text></View>
+        {rowData.showMark ? <View style={styles.mark}><Text style={styles.markText}>{rowData.mark}</Text></View> : null}
         <Image resizeMode='contain' style={[styles.product, { width: util.size.width, height: util.size.width * rowData.imageVo.height / rowData.imageVo.width }]} source={{ uri: rowData.imageVo.picUrl }} />
       </TouchableOpacity>
     )
@@ -61,10 +65,14 @@ class Mall extends Component {
 export default connect(state => ({
   banners: state.mall.banners,
   categorys: state.mall.categorys,
-  products: state.mall.products
+  products: state.mall.products,
+  total: state.cart.total
 }), dispatch => ({
   getMallIndex() {
-    return dispatch({ type: 'mall/getMallIndex'})
+    return dispatch({ type: 'mall/getMallIndex' })
+  },
+  getTotal() {
+    return dispatch({ type: 'cart/getTotal' })
   }
 }))(Mall)
 

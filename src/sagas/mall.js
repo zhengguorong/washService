@@ -1,4 +1,4 @@
-import { take, put, fork, select, call, takeLatest, all} from 'redux-saga/effects'
+import { put, fork, call, takeLatest, all} from 'redux-saga/effects'
 import * as api from '../services/api'
 
 // 获取商城首页数据

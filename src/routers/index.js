@@ -16,28 +16,28 @@ import * as RouterService from './routerService'
 const MainNavigator = StackNavigator({
   ...mallRouter,
   ...userRouter,
+  tabs: {
+    screen: tabs
+  },
   NoLogin: {
     screen: authRouter
   },
-  tabs: {
-    screen: tabs
-  }
 }, {
-    initialRouteName: 'tabs'
-  })
+  initialRouteName: 'tabs'
+})
 
 class AppNavigator extends Component {
   componentDidMount() {
-    RouterService.setNavigator(this.navigator);
+    RouterService.setNavigator(this.navigator)
   }
   render() {
-    const {toast} = this.props
+    const { toast } = this.props
     return (
       <View style={styles.container}>
-        <MainNavigator ref={nav => { this.navigator = nav; }} />
-          <Toast visible={toast.visible} text={toast.text} kind={toast.kind}/>
+        <MainNavigator ref={nav => { this.navigator = nav }} />
+        <Toast visible={toast.visible} text={toast.text} kind={toast.kind} />
       </View>
-    );
+    )
   }
 }
 

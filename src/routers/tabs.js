@@ -27,7 +27,7 @@ const homeTabs = TabNavigator(
     }
   },
   {
-    initialRouteName: '月亮社区',
+    initialRouteName: '月亮商城',
     tabBarPosition: 'bottom',
     tabBarOptions: {
       inactiveTintColor: '#999',

@@ -1,4 +1,4 @@
-import { take, put, call, fork, all, takeLatest, takeEvery, select} from 'redux-saga/effects'
+import {fork, all} from 'redux-saga/effects'
 import mall from './mall'
 import cart from './cart'
 import user from './user'
