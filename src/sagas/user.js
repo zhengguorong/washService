@@ -19,9 +19,15 @@ export function* getUserInfo () {
   yield put({type: 'user/userInfo/save', payload: response})
 }
 
+export function* logout () {
+  yield call(api.logout)
+  yield call(AsyncStorage.setItem, 'token', '')
+  yield put({type: 'ui/toast', payload: {text: '退出登录成功'}})
+}
 export default function* user() {
   yield all([
     takeLatest('user/login', login),
-    takeLatest('user/userInfo', getUserInfo)
+    takeLatest('user/userInfo', getUserInfo),
+    takeLatest('user/logout', logout)
   ])
 }

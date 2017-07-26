@@ -2,14 +2,16 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import {
   Text,
-  View
+  View,
+  TouchableOpacity
 } from 'react-native'
 
 class UserCenter extends Component {
-  render () {
+  render() {
     return (
       <View>
-        <Text>UserCenter</Text>
+        <Text>update user center</Text>
+        <TouchableOpacity onPress={()=>{this.props.logout()}}><Text>退出登录</Text></TouchableOpacity>
       </View>
     )
   }
@@ -18,5 +20,7 @@ class UserCenter extends Component {
 export default connect(state => ({
 
 }), dispatch => ({
-
+  logout() {
+    dispatch({type: 'user/logout'})
+  }
 }))(UserCenter)

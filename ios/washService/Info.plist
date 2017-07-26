@@ -40,18 +40,13 @@
 	<false/>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
-	<key>LSApplicationCategoryType</key>
-	<string></string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
 		<key>NSExceptionDomains</key>
 		<dict>
-			<key>h5.limesoftware.cn</key>
-			<dict>
-				<key>NSExceptionAllowsInsecureHTTPLoads</key>
-				<true/>
-			</dict>
-			<key>mallapi.bluemoon.com.cn</key>
+			<key>http://mallapi.bluemoon.com.cn</key>
 			<dict>
 				<key>NSExceptionAllowsInsecureHTTPLoads</key>
 				<true/>
@@ -63,5 +58,7 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>CodePushDeploymentKey</key>
+	<string>SeIb0zmwAmdkHs41uO5s2dFnpuoMd8b4328b-22b2-4689-aa5e-f0c415f295c1</string>
 </dict>
 </plist>

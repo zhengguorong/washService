@@ -1,12 +1,24 @@
 import * as config from '../config'
 import md5 from 'md5'
 import { AsyncStorage } from 'react-native'
+import * as routerService from '../routers/routerService'
 
 const API_BASE_URL = 'http://mallapi.bluemoon.com.cn'
 
-const post = async (uri, body = {}) => {
+const post = async (uri, data = {}) => {
   const token = await AsyncStorage.getItem('token');
-  body['token'] = token
+  let body = data.body || {}
+  if (data.isAuth) {
+    if (token) {
+      body['token'] = token
+    } else {
+      routerService.navigate('NoLogin')
+      return
+    }
+  }
+  if (data.needToken) {
+     body['token'] = token
+  }
   let params = JSON.stringify(body)
   return fetch(API_BASE_URL + uri + getBaseParam(params), {
     body: params,
@@ -15,9 +27,18 @@ const post = async (uri, body = {}) => {
   }).then((response => {
     return response.json()
   })).then(res => {
-    console.log({request: {url: API_BASE_URL + uri, params: body}, response: res}, 'network')
-    return res
+    console.log({ request: { url: API_BASE_URL + uri, params: body }, response: res }, uri)
+    return errorProcess(res)
   })
+}
+
+const errorProcess = (res) => {
+  if (res && res.responseCode === 1301) {
+    AsyncStorage.setItem('token', '')
+    routerService.navigate('NoLogin')
+  } else {
+    return res
+  }
 }
 
 const getBaseParam = (rowStr = '') => {
